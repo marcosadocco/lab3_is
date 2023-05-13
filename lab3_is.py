@@ -50,7 +50,7 @@ def task_3(f_u, k, flag):
     attempt = 0
     dict = {}
     #generazione dizionario
-    for i in range(len(k) ** 2,(len(k) + 1) ** 2):   
+    for i in range(2 ** len(k), 2 ** (len(k) + 1) - 1):   
         s_k = sum_digits(i)
         if s_k in dict:
             dict[s_k] += 1
@@ -239,17 +239,21 @@ def main():
     task_2('100011', '1001110')
     time_m = []
     time_k = []
-    dimension = np.arange(1, 1001, 1)
+    dimension = np.arange(1, 21, 1)
     for i in dimension:
         #vario m
         #creo u casuale in base alla lunghezza
         u = '1'
+        k_x = '1'
+        for _ in range(6 - 1):
+            bit_k = random.randint(0, 1)
+            k_x += str(bit_k)
         for _ in range(i - 1):
             bit = random.randint(0, 1)
             u += str(bit)
         #eseguo la task misurando il tempo
         start_time = time.time()
-        task_3(u, '101101', 1)
+        task_3(u, k_x, 1)
         end_time = time.time()
         time_m.append(end_time - start_time)
     for j in dimension:
