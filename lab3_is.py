@@ -49,6 +49,7 @@ def task_2(u, k):
 def task_3(f_u, k, flag):
     attempt = 0
     dict = {}
+    found = 0
     #generazione dizionario
     for i in range(2 ** len(k), 2 ** (len(k) + 1) - 1):   
         s_k = sum_digits(i)
@@ -67,13 +68,19 @@ def task_3(f_u, k, flag):
         k_int = int(k, 2)
         if guess == sum_digits(k_int):
             f_u, f_t = sign(f_u, k_bin)
+            found = 1
             #print(f"Attacco riuscito in {attempt} tentativi con la chiave {k_bin} il cui s_k vale {guess}")
             break
     if flag == 1:
-        attempt_m.append(1/attempt)
+        if found == 1:
+            attempt_m.append(1/attempt)
+        else:
+            attempt_m.append(0)
     if flag == 0:
-        attempt_k.append(1/attempt)
-
+        if found == 1:
+            attempt_k.append(1/attempt)
+        else:
+            attempt_k.append(0)
 '''
 #attack time complexity vs M
 #fix a k and make u bigger
